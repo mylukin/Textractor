@@ -1,0 +1,37 @@
+{
+  "name": "mylukin/textractor",
+  "description": "An efficient class library for extracting text from HTML.",
+  "keywords": [
+    "extractor",
+    "article",
+    "html2article"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Lukin",
+      "email": "my@lukin.cn"
+    }
+  ],
+  "require": {
+    "php": "^5.6",
+    "illuminate/support": "5.2.*|5.3.*",
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "require-dev": {
+    "illuminate/container": "5.2.*|5.3.*",
+    "illuminate/config": "5.2.*|5.3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Lukin\\Textractor\\": "src/"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "secure-http": false
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
