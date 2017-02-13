@@ -36,7 +36,21 @@ An efficient class library for extracting text from HTML.
   
 ## 使用
 
-先看看源码吧，不复杂！
+```php
+<?php
+$url = 'http://news.163.com/17/0204/08/CCDTBQ9E000189FH.html';
+// 创建提取实例
+$textractor = new \Lukin\Textractor();
+// 下载并解析文章
+$article = $textractor->download($url)->parse();
+
+printf('<div id="url">URL: %s</div>' . PHP_EOL, $url);
+printf('<div id="title">Title: %s</div>' . PHP_EOL, $article->getTitle());
+printf('<div id="published">Publish: %s</div>' . PHP_EOL, $article->getPublishDate());
+printf('<div id="text">Text: <pre>%s</pre></div>' . PHP_EOL, $article->getText());
+printf('<div id="html">Content: %s</div>' . PHP_EOL, $article->getHTML());
+
+```
 
 ## License
 
