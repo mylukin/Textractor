@@ -26,7 +26,10 @@
   "autoload": {
     "psr-4": {
       "Lukin\\Textractor\\": "src/"
-    }
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "config": {
     "sort-packages": true,
