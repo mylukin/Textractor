@@ -5,7 +5,7 @@
  * Date: 27/02/2017
  * Time: 21:27
  */
-if (function_exists('clear_space')) {
+if (!function_exists('clear_space')) {
     /**
      * 清除空白
      *
@@ -30,7 +30,7 @@ if (function_exists('clear_space')) {
     }
 }
 
-if (function_exists('mid')) {
+if (!function_exists('mid')) {
     /**
      * 内容截取，支持正则
      *
@@ -112,7 +112,7 @@ if (function_exists('mid')) {
     }
 }
 
-if (function_exists('close_tags')) {
+if (!function_exists('close_tags')) {
     /**
      * 关闭html标签
      *
