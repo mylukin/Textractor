@@ -52,15 +52,13 @@ class Textractor
      */
     private $url = '';
 
-    public function __construct($config = null)
+    public function __construct()
     {
-        if (!is_null($config)) {
-            $this->depth = isset($config['depth']) ? $config['depth'] : $this->depth;
-            $this->limit_count = isset($config['limit_count']) ? $config['limit_count'] : $this->limit_count;
-            $this->head_empty_lines = isset($config['head_empty_lines']) ? $config['head_empty_lines'] : $this->head_empty_lines;
-            $this->end_limit_char_count = isset($config['end_limit_char_count']) ? $config['end_limit_char_count'] : $this->end_limit_char_count;
-            $this->append_mode = isset($config['append_mode']) ? $config['append_mode'] : $this->append_mode;
-        }
+        $this->depth                = config('textractor.depth', $this->depth);
+        $this->limit_count          = config('textractor.limit_count', $this->limit_count);
+        $this->head_empty_lines     = config('textractor.head_empty_lines', $this->head_empty_lines);
+        $this->end_limit_char_count = config('textractor.end_limit_char_count', $this->end_limit_char_count);
+        $this->append_mode          = config('textractor.append_mode', $this->append_mode);
     }
 
     /**
@@ -207,7 +205,7 @@ class Textractor
     {
         $text_result = [];
         $html_result = [];
-        // 记录上一次统计的字符数量（lines就是去除html标签后的文本，_limitCount是阈值，_depth是我们要分析的深度，sb用于记录正文）
+        // 记录上一次统计的字符数量（text_lines就是去除html标签后的文本，_limitCount是阈值，_depth是我们要分析的深度，sb用于记录正文）
         $pre_text_len = 0;
         // 记录文章正文的起始位置
         $start_pos = -1;
@@ -232,10 +230,10 @@ class Textractor
                     // 查找文章起始位置, 如果向上查找，发现2行连续的空行则认为是头部
                     $empty_count = 0;
                     for ($k = $i - 1; $k > 0; $k--) {
-                        if (!isset($lines[$k])) {
+                        if (!isset($text_lines[$k])) {
                             continue;
                         }
-                        if (strlen(trim($lines[$k])) == 0) {
+                        if (strlen(trim($text_lines[$k])) == 0) {
                             $empty_count++;
                         } else {
                             $empty_count = 0;
@@ -252,10 +250,11 @@ class Textractor
                         $start_pos = $i;
                     }
                     // 填充发现的文章起始部分
-                    for ($j = $start_pos; $j <= $i; $j++) {
-                        $text_result[] = $text_lines[$i];
-                        $html_result[] = $html_lines[$i];
+                    if (strlen(trim($text_lines[$i])) == 0) {
+                        continue;
                     }
+                    $text_result[] = $text_lines[$i];
+                    $html_result[] = $html_lines[$i];
                 }
             } else {
                 // 当前长度为0，且上一个长度也为0，则认为已经结束
@@ -266,7 +265,9 @@ class Textractor
                     }
                     $start_pos = -1;
                 }
-
+                if (strlen(trim($text_lines[$i])) == 0) {
+                    continue;
+                }
                 $text_result[] = $text_lines[$i];
                 $html_result[] = $html_lines[$i];
             }
