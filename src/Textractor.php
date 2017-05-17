@@ -207,7 +207,7 @@ class Textractor
     {
         $text_result = [];
         $html_result = [];
-        // 记录上一次统计的字符数量（lines就是去除html标签后的文本，_limitCount是阈值，_depth是我们要分析的深度，sb用于记录正文）
+        // 记录上一次统计的字符数量（text_lines就是去除html标签后的文本，_limitCount是阈值，_depth是我们要分析的深度，sb用于记录正文）
         $pre_text_len = 0;
         // 记录文章正文的起始位置
         $start_pos = -1;
@@ -232,10 +232,10 @@ class Textractor
                     // 查找文章起始位置, 如果向上查找，发现2行连续的空行则认为是头部
                     $empty_count = 0;
                     for ($k = $i - 1; $k > 0; $k--) {
-                        if (!isset($lines[$k])) {
+                        if (!isset($text_lines[$k])) {
                             continue;
                         }
-                        if (strlen(trim($lines[$k])) == 0) {
+                        if (strlen(trim($text_lines[$k])) == 0) {
                             $empty_count++;
                         } else {
                             $empty_count = 0;
