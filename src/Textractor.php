@@ -52,15 +52,13 @@ class Textractor
      */
     private $url = '';
 
-    public function __construct($config = null)
+    public function __construct()
     {
-        if (!is_null($config)) {
-            $this->depth = isset($config['depth']) ? $config['depth'] : $this->depth;
-            $this->limit_count = isset($config['limit_count']) ? $config['limit_count'] : $this->limit_count;
-            $this->head_empty_lines = isset($config['head_empty_lines']) ? $config['head_empty_lines'] : $this->head_empty_lines;
-            $this->end_limit_char_count = isset($config['end_limit_char_count']) ? $config['end_limit_char_count'] : $this->end_limit_char_count;
-            $this->append_mode = isset($config['append_mode']) ? $config['append_mode'] : $this->append_mode;
-        }
+        $this->depth                = config('textractor.depth', $this->depth);
+        $this->limit_count          = config('textractor.limit_count', $this->limit_count);
+        $this->head_empty_lines     = config('textractor.head_empty_lines', $this->head_empty_lines);
+        $this->end_limit_char_count = config('textractor.end_limit_char_count', $this->end_limit_char_count);
+        $this->append_mode          = config('textractor.append_mode', $this->append_mode);
     }
 
     /**
