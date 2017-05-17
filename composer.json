@@ -1,5 +1,5 @@
 {
-  "name": "mylukin/textractor",
+  "name": "crlwinner/textractor",
   "description": "An efficient class library for extracting text from HTML.",
   "keywords": [
     "extractor",
@@ -12,6 +12,10 @@
     {
       "name": "Lukin",
       "email": "my@lukin.cn"
+    },
+    {
+      "name": "Alex",
+      "email": "crlwinner@gmail.com"
     }
   ],
   "require": {
