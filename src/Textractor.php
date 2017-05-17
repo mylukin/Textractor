@@ -252,10 +252,11 @@ class Textractor
                         $start_pos = $i;
                     }
                     // 填充发现的文章起始部分
-                    for ($j = $start_pos; $j <= $i; $j++) {
-                        $text_result[] = $text_lines[$i];
-                        $html_result[] = $html_lines[$i];
+                    if (strlen(trim($text_lines[$i])) == 0) {
+                        continue;
                     }
+                    $text_result[] = $text_lines[$i];
+                    $html_result[] = $html_lines[$i];
                 }
             } else {
                 // 当前长度为0，且上一个长度也为0，则认为已经结束
@@ -266,7 +267,9 @@ class Textractor
                     }
                     $start_pos = -1;
                 }
-
+                if (strlen(trim($text_lines[$i])) == 0) {
+                    continue;
+                }
                 $text_result[] = $text_lines[$i];
                 $html_result[] = $html_lines[$i];
             }
