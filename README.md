@@ -40,7 +40,7 @@ An efficient class library for extracting text from HTML.
 <?php
 $url = 'http://news.163.com/17/0204/08/CCDTBQ9E000189FH.html';
 // 创建提取实例
-$textractor = new \Lukin\Textractor();
+$textractor = new \Lukin\Textractor\Textractor();
 // 下载并解析文章
 $article = $textractor->download($url)->parse();
 
